@@ -11,17 +11,18 @@ from .util import draw_bb_on_img
 from .constants import MODEL_PATH
 import time
 
+'python -m inference.video_classifier --video-path /home/dpw/codes/face-recognition/test/videoplayback.mp4 --save-dir videoplayback_output.mp4'
 
 def parse_args():
     parser = argparse.ArgumentParser(
-        'Script for detecting and classifying faces on user-provided image. This script will process image, draw '
-        'bounding boxes and labels on image and display it. It will also optionally save that image.')
+        'Visualize result and save as a mp4 format. save dir will be in "result" folder')
     parser.add_argument('--video-path', required=True, help='Path to image file.')
     parser.add_argument('--save-dir', help='If save dir is provided image will be saved to specified directory.')
     return parser.parse_args()
 
 def main():
     args = parse_args()
+
     # cap = cv2.VideoCapture(0) #webcam
 
     cap = cv2.VideoCapture(args.video_path)
@@ -32,7 +33,7 @@ def main():
 
     width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-    writer = cv2.VideoWriter(save_dir, cv2.VideoWriter_fourcc(*'mp4v'),25, (width, height))
+    writer = cv2.VideoWriter('./result/'+save_dir, cv2.VideoWriter_fourcc(*'mp4v'),25, (width, height))
 
 
     while True:
@@ -41,6 +42,7 @@ def main():
         curTime = time.time()
         sec = curTime - prevTime
         prevTime = curTime
+        
         fps = 1 / (sec)
 
         #Remark FPS in video
@@ -70,3 +72,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+

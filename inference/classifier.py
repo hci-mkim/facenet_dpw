@@ -34,6 +34,8 @@ def main():
     img = img.convert('RGB')
 
     faces, img = recognise_faces(img)
+    print('Who is it?: ', faces[0][0][0], ' | ', 'Confidence: ', round((faces[0][0][1]),3))
+
     if not faces:
         print('No faces found in this image.')
 

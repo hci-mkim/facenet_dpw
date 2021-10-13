@@ -1,0 +1,11 @@
+train
+./tasks/train.sh ./data/train_img
+
+run image
+python -m inference.classifier --image-path ./data/test_img/IU/KakaoTalk_20211013_112644748_05.jpg --save-dir ./data/output_img/KakaoTalk_20211013_112644748_05.jpg
+
+run video
+python -m inference.video_classifier --video-path ./data/test_img/IU/videoplayback.mp4 --save-dir ./data/output_img/videoplayback_output.mp4
+
+
+
